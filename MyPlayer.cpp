@@ -214,25 +214,25 @@ public:
                         }
                     }
 
-                    // if(info.player->GetCorpse() != nullptr)
-                    // {
-                    //     Position pos = info.player->GetCorpse()->GetPosition();
+                    if(info.player->GetCorpse() != nullptr)
+                    {
+                        Position pos = info.player->GetCorpse()->GetPosition();
 
-                    //     if(!info.player->IsInRange2d(pos.m_positionX, pos.m_positionY, 0.0f, 2.0f))
-                    //     {
-                    //         float z = pos.m_positionZ;
-                    //         info.player->UpdateGroundPositionZ(pos.m_positionX, pos.m_positionY, z);
-                    //         info.motion->Clear();
-                    //         info.motion->MovePoint(info.player->GetMapId(), pos.m_positionX, pos.m_positionY, z);
-                    //     }
-                    //     else if(info.packets.find(CMSG_RECLAIM_CORPSE) == info.packets.end())
-                    //     {
-                    //         WorldPacket *packet = new WorldPacket(CMSG_RECLAIM_CORPSE);
-                    //         packet->resize(8);
-                    //         info.player->GetSession()->QueuePacket(packet);
-                    //         info.packets.insert(std::make_pair(CMSG_RECLAIM_CORPSE, std::move(packet)));
-                    //     }
-                    // }
+                        if(!info.player->IsInRange2d(pos.m_positionX, pos.m_positionY, 0.0f, 2.0f))
+                        {
+                            float z = pos.m_positionZ;
+                            info.player->UpdateGroundPositionZ(pos.m_positionX, pos.m_positionY, z);
+                            info.motion->Clear();
+                            info.motion->MovePoint(info.player->GetMapId(), pos.m_positionX, pos.m_positionY, z);
+                        }
+                        else if(info.packets.find(CMSG_RECLAIM_CORPSE) == info.packets.end())
+                        {
+                            WorldPacket *packet = new WorldPacket(CMSG_RECLAIM_CORPSE);
+                            packet->resize(8);
+                            info.player->GetSession()->QueuePacket(packet);
+                            info.packets.insert(std::make_pair(CMSG_RECLAIM_CORPSE, std::move(packet)));
+                        }
+                    }
                 }
             }
         }
